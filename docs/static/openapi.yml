@@ -50906,6 +50906,8 @@ definitions:
     title: >-
       SignatureCounts contains information about signature reporting for a
       number of blocks
+  username.nameservice.nameservice.MsgBuyNameResponse:
+    type: object
   username.nameservice.nameservice.Params:
     type: object
     description: Params defines the parameters for the module.
