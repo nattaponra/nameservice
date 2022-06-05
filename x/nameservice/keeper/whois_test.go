@@ -4,12 +4,12 @@ import (
 	"strconv"
 	"testing"
 
-	"github.com/username/nameservice/x/nameservice/keeper"
-	"github.com/username/nameservice/x/nameservice/types"
-	keepertest "github.com/username/nameservice/testutil/keeper"
-	"github.com/username/nameservice/testutil/nullify"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/stretchr/testify/require"
+	keepertest "github.com/username/nameservice/testutil/keeper"
+	"github.com/username/nameservice/testutil/nullify"
+	"github.com/username/nameservice/x/nameservice/keeper"
+	"github.com/username/nameservice/x/nameservice/types"
 )
 
 // Prevent strconv unused error
@@ -19,7 +19,7 @@ func createNWhois(keeper *keeper.Keeper, ctx sdk.Context, n int) []types.Whois {
 	items := make([]types.Whois, n)
 	for i := range items {
 		items[i].Index = strconv.Itoa(i)
-        
+
 		keeper.SetWhois(ctx, items[i])
 	}
 	return items
@@ -30,8 +30,7 @@ func TestWhoisGet(t *testing.T) {
 	items := createNWhois(keeper, ctx, 10)
 	for _, item := range items {
 		rst, found := keeper.GetWhois(ctx,
-		    item.Index,
-            
+			item.Index,
 		)
 		require.True(t, found)
 		require.Equal(t,
@@ -45,12 +44,10 @@ func TestWhoisRemove(t *testing.T) {
 	items := createNWhois(keeper, ctx, 10)
 	for _, item := range items {
 		keeper.RemoveWhois(ctx,
-		    item.Index,
-            
+			item.Index,
 		)
 		_, found := keeper.GetWhois(ctx,
-		    item.Index,
-            
+			item.Index,
 		)
 		require.False(t, found)
 	}

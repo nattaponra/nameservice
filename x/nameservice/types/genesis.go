@@ -1,7 +1,7 @@
 package types
 
 import (
-"fmt"
+	"fmt"
 )
 
 // DefaultIndex is the default capability global index
@@ -11,7 +11,7 @@ const DefaultIndex uint64 = 1
 func DefaultGenesis() *GenesisState {
 	return &GenesisState{
 		WhoisList: []Whois{},
-// this line is used by starport scaffolding # genesis/types/default
+		// this line is used by starport scaffolding # genesis/types/default
 		Params: DefaultParams(),
 	}
 }
@@ -20,16 +20,16 @@ func DefaultGenesis() *GenesisState {
 // failure.
 func (gs GenesisState) Validate() error {
 	// Check for duplicated index in whois
-whoisIndexMap := make(map[string]struct{})
+	whoisIndexMap := make(map[string]struct{})
 
-for _, elem := range gs.WhoisList {
-	index := string(WhoisKey(elem.Index))
-	if _, ok := whoisIndexMap[index]; ok {
-		return fmt.Errorf("duplicated index for whois")
+	for _, elem := range gs.WhoisList {
+		index := string(WhoisKey(elem.Index))
+		if _, ok := whoisIndexMap[index]; ok {
+			return fmt.Errorf("duplicated index for whois")
+		}
+		whoisIndexMap[index] = struct{}{}
 	}
-	whoisIndexMap[index] = struct{}{}
-}
-// this line is used by starport scaffolding # genesis/types/validate
+	// this line is used by starport scaffolding # genesis/types/validate
 
 	return gs.Params.Validate()
 }

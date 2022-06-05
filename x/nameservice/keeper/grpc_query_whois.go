@@ -46,11 +46,11 @@ func (k Keeper) Whois(c context.Context, req *types.QueryGetWhoisRequest) (*type
 	ctx := sdk.UnwrapSDKContext(c)
 
 	val, found := k.GetWhois(
-	    ctx,
-	    req.Index,
-        )
+		ctx,
+		req.Index,
+	)
 	if !found {
-	    return nil, status.Error(codes.NotFound, "not found")
+		return nil, status.Error(codes.NotFound, "not found")
 	}
 
 	return &types.QueryGetWhoisResponse{Whois: val}, nil

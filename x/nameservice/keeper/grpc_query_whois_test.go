@@ -1,7 +1,7 @@
 package keeper_test
 
 import (
-    "strconv"
+	"strconv"
 	"testing"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
@@ -10,9 +10,9 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 
-	"github.com/username/nameservice/x/nameservice/types"
-	"github.com/username/nameservice/testutil/nullify"
 	keepertest "github.com/username/nameservice/testutil/keeper"
+	"github.com/username/nameservice/testutil/nullify"
+	"github.com/username/nameservice/x/nameservice/types"
 )
 
 // Prevent strconv unused error
@@ -29,28 +29,25 @@ func TestWhoisQuerySingle(t *testing.T) {
 		err      error
 	}{
 		{
-			desc:     "First",
-			request:  &types.QueryGetWhoisRequest{
-			    Index: msgs[0].Index,
-                
+			desc: "First",
+			request: &types.QueryGetWhoisRequest{
+				Index: msgs[0].Index,
 			},
 			response: &types.QueryGetWhoisResponse{Whois: msgs[0]},
 		},
 		{
-			desc:     "Second",
-			request:  &types.QueryGetWhoisRequest{
-			    Index: msgs[1].Index,
-                
+			desc: "Second",
+			request: &types.QueryGetWhoisRequest{
+				Index: msgs[1].Index,
 			},
 			response: &types.QueryGetWhoisResponse{Whois: msgs[1]},
 		},
 		{
-			desc:    "KeyNotFound",
+			desc: "KeyNotFound",
 			request: &types.QueryGetWhoisRequest{
-			    Index:strconv.Itoa(100000),
-                
+				Index: strconv.Itoa(100000),
 			},
-			err:     status.Error(codes.NotFound, "not found"),
+			err: status.Error(codes.NotFound, "not found"),
 		},
 		{
 			desc: "InvalidRequest",
@@ -94,9 +91,9 @@ func TestWhoisQueryPaginated(t *testing.T) {
 			require.NoError(t, err)
 			require.LessOrEqual(t, len(resp.Whois), step)
 			require.Subset(t,
-            	nullify.Fill(msgs),
-            	nullify.Fill(resp.Whois),
-            )
+				nullify.Fill(msgs),
+				nullify.Fill(resp.Whois),
+			)
 		}
 	})
 	t.Run("ByKey", func(t *testing.T) {
@@ -107,9 +104,9 @@ func TestWhoisQueryPaginated(t *testing.T) {
 			require.NoError(t, err)
 			require.LessOrEqual(t, len(resp.Whois), step)
 			require.Subset(t,
-            	nullify.Fill(msgs),
-            	nullify.Fill(resp.Whois),
-            )
+				nullify.Fill(msgs),
+				nullify.Fill(resp.Whois),
+			)
 			next = resp.Pagination.NextKey
 		}
 	})
