@@ -50908,6 +50908,8 @@ definitions:
       number of blocks
   username.nameservice.nameservice.MsgBuyNameResponse:
     type: object
+  username.nameservice.nameservice.MsgDeleteNameResponse:
+    type: object
   username.nameservice.nameservice.MsgSetNameResponse:
     type: object
   username.nameservice.nameservice.Params:
